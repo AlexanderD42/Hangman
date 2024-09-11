@@ -3,34 +3,45 @@ import random
 
 def hangman():
 
-    word_list = ["python", "robot", "coding"]
+    word_list = ["python", "robot", "coding", "bookshelf", "pirate"]
 
     word = random.choice(word_list)
 
-    answer = '-' * len(word)
-
-    print(answer)
+    answer = ["-" for i in range(len(word))]
 
     
-    while answer != word:
+    
+
+    print('-' * len(word))
+
+    
+    while True:
+        check = ""
         guess(word, answer)
+        for x in answer:
+            check += x
+
+        print('\n', check)
+
+        if check == word:
+            print('-' * 50, "\n\nyou won\n\n")
+            break
+            
         
     
-
-    
-
-        
-
 
 def guess(word, answer):
 
-    guess = input("Guess a letter.\n")
+    guess = input("Guess a letter.\n").lower()
       
-    for i in range(len(word)):
-        if guess == word[i]:
-            answer = answer[:i] + guess + answer[i:]
 
-    print(answer)
+    for i in range(len(word)):
+        if guess == word[i] and len(guess) < 2:
+            answer[i] = guess
+    
+    
+
+    
 
 
 
